@@ -3,82 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MONO Global | 全球独立音乐分发 & 数字化管理平台</title>
+    <title>MONO Global | 全球独立音乐分发 & 数字化资产管理平台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --accent: #fff; --bg: #000; --card: #0a0a0a; --border: #1a1a1a; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        :root { --accent: #fff; --bg: #000; --card: #0d0d0d; --border: #1f1f1f; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-        .nav-active { color: var(--accent) !important; border-bottom: 2px solid var(--accent); }
         .view { display: none; }
-        .view.active { display: block; animation: pageIn 0.5s ease-out; }
-        @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid var(--border); }
-        .hero-gradient { background: radial-gradient(circle at top right, #1a1a1a, #000); }
+        .view.active { display: block; animation: pageIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid var(--border); }
+        .nav-active { color: #fff !important; font-weight: bold; }
         ::-webkit-scrollbar { width: 0; }
+        input::placeholder { color: #444; }
     </style>
 </head>
-<body>
+<body class="pb-20">
 
     <nav class="fixed top-0 w-full z-[100] glass border-b border-white/5 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-2" onclick="showView('view-home')">
-            <div class="w-6 h-6 bg-white rotate-45"></div>
+        <div class="flex items-center gap-2" onclick="showView('view-landing')">
+            <div class="w-5 h-5 bg-white rounded-sm rotate-45"></div>
             <span class="text-xl font-black tracking-tighter italic">MONO.</span>
         </div>
-        <div id="guest-nav" class="flex gap-4">
-            <button onclick="showView('view-login')" class="text-sm font-medium">登录</button>
-            <button onclick="showView('view-register')" class="bg-white text-black text-[12px] font-bold px-4 py-1.5 rounded-full">开启发行</button>
+        <div id="nav-guest" class="flex gap-4">
+            <button onclick="showView('view-login')" class="text-xs font-bold text-gray-400">管理端</button>
+            <button onclick="showView('view-register')" class="bg-white text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">立即入驻</button>
+        </div>
+        <div id="nav-user" class="hidden flex gap-4">
+            <i data-lucide="bell" class="w-5 h-5 text-gray-500"></i>
+            <div class="w-6 h-6 rounded-full bg-zinc-800 border border-white/10 overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=mono" class="w-full h-full">
+            </div>
         </div>
     </nav>
 
-    <section id="view-home" class="view active pt-20">
-        <div class="hero-gradient px-6 py-16 text-center">
-            <h1 class="text-5xl font-black tracking-tighter leading-none mb-6">连接全球<br>释放音乐价值</h1>
-            <p class="text-gray-400 text-sm mb-8 leading-relaxed">一站式将你的音乐分发至 Spotify, Apple Music, TikTok 等 150+ 平台，保留 100% 版权，享受透明的实时结算。</p>
+    <section id="view-landing" class="view active pt-24 px-6">
+        <div class="text-center py-10">
+            <h1 class="text-6xl font-black leading-[0.95] tracking-tighter mb-6">连接全球<br><span class="text-zinc-700 italic">释放商业潜能</span></h1>
+            <p class="text-zinc-500 text-sm mb-10 leading-relaxed max-w-xs mx-auto">不仅仅是分发。我们通过行业顶尖的版权追踪技术，确保您的每一分版税都能精准回归。</p>
             
-            <div class="relative w-full aspect-video glass rounded-2xl overflow-hidden mb-10 group">
-                <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-active:bg-black/10">
-                    <i data-lucide="play-circle" class="w-16 h-16 text-white/80"></i>
+            <div class="relative w-full aspect-[16/10] glass rounded-3xl overflow-hidden mb-12 shadow-2xl">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 text-left">
+                    <p class="text-[10px] uppercase font-bold text-zinc-400 mb-1">正在播放：平台功能演示</p>
+                    <p class="text-sm font-bold">了解 MONO 如何保护您的全球版权</p>
                 </div>
-                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Introduction Video">
-                <div class="absolute bottom-4 left-4 text-[10px] bg-black/60 px-2 py-1 rounded">观看平台介绍视频 (2:00)</div>
-            </div>
-        </div>
-
-        <div class="px-6 space-y-4 mb-20">
-            <h3 class="text-center text-xs font-bold text-gray-600 uppercase tracking-widest mb-8">为什么选择 MONO</h3>
-            <div class="glass p-6 rounded-3xl">
-                <i data-lucide="globe" class="mb-4 text-white"></i>
-                <h4 class="font-bold mb-2">全球化分发矩阵</h4>
-                <p class="text-xs text-gray-500">不仅是 Spotify 和 Apple，更深入覆盖东南亚、拉美及中国本土主流音乐生态。</p>
-            </div>
-            <div class="glass p-6 rounded-3xl border-l-4 border-l-white">
-                <i data-lucide="pie-chart" class="mb-4 text-white"></i>
-                <h4 class="font-bold mb-2">自动分账系统 (Splits)</h4>
-                <p class="text-xs text-gray-500">再也不用手动转账。设置比例，平台自动将版税打入每个合作人的账户。</p>
-            </div>
-        </div>
-
-        <div class="px-6 mb-20">
-            <h3 class="text-xs font-bold text-gray-600 uppercase mb-6">成功案例</h3>
-            <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-                <div class="min-w-[200px] glass rounded-2xl p-4">
-                    <div class="aspect-square bg-zinc-800 rounded-lg mb-3 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1514525253361-bee8718a300a?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-50">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                        <i data-lucide="play" class="fill-white w-6 h-6 ml-1"></i>
                     </div>
-                    <p class="font-bold text-sm">Independent Artist A</p>
-                    <p class="text-[10px] text-gray-500">通过 MONO 获得 1.2亿 全球播放</p>
-                </div>
-                <div class="min-w-[200px] glass rounded-2xl p-4">
-                    <div class="aspect-square bg-zinc-800 rounded-lg mb-3 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
-                    </div>
-                    <p class="font-bold text-sm">Techno Label X</p>
-                    <p class="text-[10px] text-gray-500">旗下 20 位艺人统一版权管理</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="view-login" class="view px-8 pt-32">
-        <h2 c
+        <div class="mb-20">
+            <h3 class="text-[10px] font-bold text-zinc-600 uppercase tracking-widest text-center mb-8 italic">— 支持全球 150+ 数字化渠道 —</h3>
+            <div class="grid grid-cols-3 gap-6 opacity-30 grayscale contrast-125">
+                <div class="text-center font-black italic text-sm italic underline">Spotify</div>
+                <div class="text-center font-black italic text-sm underline">Apple Music</div>
+                <div class="text-center font-black italic text-sm underline">TikTok</div>
+                <div class="text-center font-black italic text-sm underline">Tencent</div>
+                <div class="text-center font-black italic text-sm underline">NetEase</div>
+                <div class="text-center font-black italic text-sm underline">Amazon</div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <h3 class="text-xs font-bold mb-6 italic underline">SUCCESS STORIES / 成功案例</h3>
+            <div class="flex gap-4 overflow-x-auto no-scrollbar pb-6">
+                <div class="min-w-[240px] glass p-5 rounded-3xl">
+                    <div class="w-full aspect-square rounded-2xl bg-zinc-900 mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&
