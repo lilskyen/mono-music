@@ -3,85 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MONO | 全球音乐分发中枢</title>
+    <title>MONO Global | 全球独立音乐分发 & 数字化管理平台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --black: #000; --white: #fff; --gray: #121212; --border: #262626; --accent: #fff; }
-        body { background: var(--black); color: var(--white); font-family: -apple-system, system-ui, sans-serif; overflow-x: hidden; }
+        :root { --accent: #fff; --bg: #000; --card: #0a0a0a; --border: #1a1a1a; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .nav-active { color: var(--accent) !important; border-bottom: 2px solid var(--accent); }
         .view { display: none; }
-        .view.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .input-dark { background: #111; border: 1px solid #333; padding: 12px; border-radius: 8px; width: 100%; outline: none; }
-        .input-dark:focus { border-color: #fff; }
+        .view.active { display: block; animation: pageIn 0.5s ease-out; }
+        @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid var(--border); }
+        .hero-gradient { background: radial-gradient(circle at top right, #1a1a1a, #000); }
+        ::-webkit-scrollbar { width: 0; }
     </style>
 </head>
-<body class="pb-20">
+<body>
 
-    <section id="view-landing" class="view active">
-        <nav class="p-6 flex justify-between items-center sticky top-0 bg-black/80 backdrop-blur-md z-50">
-            <h1 class="text-2xl font-black italic tracking-tighter">MONO.</h1>
-            <button onclick="showView('view-login')" class="text-sm font-bold border border-white/20 px-4 py-2 rounded-full">登录</button>
-        </nav>
-        
-        <div class="p-6 pt-12 text-center">
-            <h2 class="text-5xl font-black leading-none mb-6">让你的声音<br><span class="text-gray-500 italic">在全世界共振</span></h2>
-            <p class="text-gray-400 text-sm mb-10 leading-relaxed px-4">中国领先的独立音乐发行中枢。支持全球 150+ 平台，自动 ISRC 生成，支持多人协作分账，支付宝秒级结算。</p>
-            <div class="flex flex-col gap-4 px-4">
-                <button onclick="showView('view-register')" class="bg-white text-black font-bold py-4 rounded-xl">立即开始发行</button>
-                <button class="border border-white/10 py-4 rounded-xl text-sm">查看分发平台清单</button>
+    <nav class="fixed top-0 w-full z-[100] glass border-b border-white/5 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2" onclick="showView('view-home')">
+            <div class="w-6 h-6 bg-white rotate-45"></div>
+            <span class="text-xl font-black tracking-tighter italic">MONO.</span>
+        </div>
+        <div id="guest-nav" class="flex gap-4">
+            <button onclick="showView('view-login')" class="text-sm font-medium">登录</button>
+            <button onclick="showView('view-register')" class="bg-white text-black text-[12px] font-bold px-4 py-1.5 rounded-full">开启发行</button>
+        </div>
+    </nav>
+
+    <section id="view-home" class="view active pt-20">
+        <div class="hero-gradient px-6 py-16 text-center">
+            <h1 class="text-5xl font-black tracking-tighter leading-none mb-6">连接全球<br>释放音乐价值</h1>
+            <p class="text-gray-400 text-sm mb-8 leading-relaxed">一站式将你的音乐分发至 Spotify, Apple Music, TikTok 等 150+ 平台，保留 100% 版权，享受透明的实时结算。</p>
+            
+            <div class="relative w-full aspect-video glass rounded-2xl overflow-hidden mb-10 group">
+                <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-active:bg-black/10">
+                    <i data-lucide="play-circle" class="w-16 h-16 text-white/80"></i>
+                </div>
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Introduction Video">
+                <div class="absolute bottom-4 left-4 text-[10px] bg-black/60 px-2 py-1 rounded">观看平台介绍视频 (2:00)</div>
             </div>
         </div>
 
-        <div class="mt-20 px-6">
-            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 text-center">覆盖全球主流平台</h3>
-            <div class="grid grid-cols-3 gap-8 opacity-40 grayscale">
-                <div class="text-center font-bold italic text-sm">Spotify</div>
-                <div class="text-center font-bold italic text-sm">Apple Music</div>
-                <div class="text-center font-bold italic text-sm">NetEase</div>
-                <div class="text-center font-bold italic text-sm">TikTok</div>
-                <div class="text-center font-bold italic text-sm">Tencent</div>
-                <div class="text-center font-bold italic text-sm">YouTube</div>
+        <div class="px-6 space-y-4 mb-20">
+            <h3 class="text-center text-xs font-bold text-gray-600 uppercase tracking-widest mb-8">为什么选择 MONO</h3>
+            <div class="glass p-6 rounded-3xl">
+                <i data-lucide="globe" class="mb-4 text-white"></i>
+                <h4 class="font-bold mb-2">全球化分发矩阵</h4>
+                <p class="text-xs text-gray-500">不仅是 Spotify 和 Apple，更深入覆盖东南亚、拉美及中国本土主流音乐生态。</p>
+            </div>
+            <div class="glass p-6 rounded-3xl border-l-4 border-l-white">
+                <i data-lucide="pie-chart" class="mb-4 text-white"></i>
+                <h4 class="font-bold mb-2">自动分账系统 (Splits)</h4>
+                <p class="text-xs text-gray-500">再也不用手动转账。设置比例，平台自动将版税打入每个合作人的账户。</p>
+            </div>
+        </div>
+
+        <div class="px-6 mb-20">
+            <h3 class="text-xs font-bold text-gray-600 uppercase mb-6">成功案例</h3>
+            <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+                <div class="min-w-[200px] glass rounded-2xl p-4">
+                    <div class="aspect-square bg-zinc-800 rounded-lg mb-3 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm">Independent Artist A</p>
+                    <p class="text-[10px] text-gray-500">通过 MONO 获得 1.2亿 全球播放</p>
+                </div>
+                <div class="min-w-[200px] glass rounded-2xl p-4">
+                    <div class="aspect-square bg-zinc-800 rounded-lg mb-3 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-sm">Techno Label X</p>
+                    <p class="text-[10px] text-gray-500">旗下 20 位艺人统一版权管理</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="view-login" class="view p-8 pt-20">
-        <h2 class="text-3xl font-bold mb-2">欢迎回来</h2>
-        <p class="text-gray-500 text-sm mb-10">请输入您的音乐人账号</p>
-        <div class="space-y-4">
-            <input type="email" placeholder="邮箱地址" class="input-dark">
-            <input type="password" placeholder="密码" class="input-dark">
-            <div class="flex justify-between text-xs text-gray-500">
-                <label class="flex items-center gap-2"><input type="checkbox"> 记住我</label>
-                <button onclick="showView('view-forgot')">忘记密码？</button>
-            </div>
-            <button onclick="enterConsole()" class="w-full bg-white text-black font-bold py-4 rounded-xl mt-6">登录</button>
-            <p class="text-center text-xs text-gray-500 pt-4">没有账号？<button onclick="showView('view-register')" class="text-white font-bold">立即注册</button></p>
-        </div>
-    </section>
-
-    <section id="view-register" class="view p-8 pt-20">
-        <h2 class="text-3xl font-bold mb-2">加入 MONO</h2>
-        <p class="text-gray-500 text-sm mb-10">开启您的全球音乐事业</p>
-        <div class="space-y-4">
-            <input type="text" placeholder="音乐人/厂牌名称" class="input-dark">
-            <input type="email" placeholder="电子邮箱" class="input-dark">
-            <input type="password" placeholder="创建密码" class="input-dark">
-            <div class="text-[10px] text-gray-600 leading-tight">点击注册即代表您同意我们的《发行协议》与《隐私条款》。</div>
-            <button onclick="enterConsole()" class="w-full bg-white text-black font-bold py-4 rounded-xl mt-4">创建账号</button>
-            <button onclick="showView('view-login')" class="w-full text-center text-xs text-gray-500 pt-4">返回登录</button>
-        </div>
-    </section>
-
-    <section id="view-forgot" class="view p-8 pt-20">
-        <h2 class="text-3xl font-bold mb-2">重置密码</h2>
-        <p class="text-gray-500 text-sm mb-10">我们将向您的邮箱发送重置链接</p>
-        <div class="space-y-4">
-            <input type="email" placeholder="注册邮箱地址" class="input-dark">
-            <button class="w-full bg-white text-black font-bold py-4 rounded-xl">发送重置邮件</button>
-            <button onclick="showView('view-login')" class="w-full text-center text-xs text-gray-500 pt-4">返回登录</button>
-        </div>
-    </section>
-
-    <section id="view-con
+    <section id="view-login" class="view px-8 pt-32">
+        <h2 c
