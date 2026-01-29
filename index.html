@@ -3,88 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MONO | 全球音乐发行</title>
+    <title>MONO Distribution | 全球分发控制台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --black: #000000; --white: #ffffff; --gray: #121212; --border: #262626; }
-        body { background-color: var(--black); color: var(--white); font-family: -apple-system, sans-serif; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .glass-nav { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border-top: 1px solid var(--border); }
+        :root { --b: #000; --w: #fff; --g: #121212; --border: #262626; }
+        body { background: var(--b); color: var(--w); font-family: sans-serif; overflow-x: hidden; }
+        .view { display: none; }
+        .view.active { display: block; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-btn.active { color: white; border-bottom: 2px solid white; }
     </style>
 </head>
-<body>
-
-    <section id="page-landing" class="min-h-screen p-8 flex flex-col justify-between">
-        <div class="mt-20">
-            <h1 class="text-6xl font-black italic tracking-tighter mb-4">MONO.</h1>
-            <p class="text-gray-400 text-xl font-light">比 CD Baby 更懂中国音乐人。<br>全球分发，黑白分明。</p>
+<body class="pb-24">
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10 p-4 flex justify-between items-center">
+        <h1 class="text-xl font-black italic tracking-tighter">MONO.后台</h1>
+        <div class="flex gap-4 items-center">
+            <span class="text-[10px] bg-white text-black px-2 py-0.5 font-bold rounded">PRO 账户</span>
+            <i data-lucide="user" class="w-5 h-5"></i>
         </div>
-        <div class="space-y-4 mb-10">
-            <button onclick="enterApp()" class="w-full bg-white text-black font-bold py-5 rounded-full text-lg active:scale-95 transition">进入控制台</button>
-            <p class="text-center text-xs text-gray-600">点击进入演示版</p>
+    </header>
+
+    <main id="view-home" class="view active p-5">
+        <section class="mb-8">
+            <p class="text-gray-500 text-xs uppercase tracking-widest mb-1">未结算全球版税</p>
+            <h2 class="text-4xl font-mono font-bold italic">¥42,850.12</h2>
+            <div class="mt-4 flex gap-2">
+                <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded-sm">立即提现</button>
+                <button class="border border-white/20 text-xs px-4 py-2 rounded-sm">财务报表</button>
+            </div>
+        </section>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+            <div class="bg-zinc-900 p-4 border border-white/5 rounded-lg">
+                <p class="text-gray-500 text-[10px]">分发渠道</p>
+                <p class="text-lg font-bold">156 平台</p>
+            </div>
+            <div class="bg-zinc-900 p-4 border border-white/5 rounded-lg">
+                <p class="text-gray-500 text-[10px]">版权警告</p>
+                <p class="text-lg font-bold text-green-500">0 风险</p>
+            </div>
         </div>
-    </section>
-
-    <section id="page-app" class="hidden min-h-screen pb-24">
-        <header class="p-6 flex justify-between items-center border-b border-white/5">
-            <span class="text-xl font-black italic">MONO.</span>
-            <div class="flex gap-4">
-                <i data-lucide="search" class="w-6 h-6"></i>
-                <i data-lucide="bell" class="w-6 h-6"></i>
-            </div>
-        </header>
-
-        <div id="dashboard" class="tab-content active p-6">
-            <p class="text-gray-500 text-sm">预估总余额 (CNY)</p>
-            <h2 class="text-5xl font-mono font-bold my-4">¥12,840.50</h2>
-            <div class="grid grid-cols-2 gap-4 my-8">
-                <div class="bg-[#111] border border-white/10 p-4 rounded-2xl">
-                    <p class="text-[10px] text-gray-500 uppercase">昨日播放</p>
-                    <p class="text-xl font-bold font-mono">+12.4K</p>
+        <h3 class="text-sm font-bold mb-4 flex items-center gap-2">
+            <i data-lucide="activity" class="w-4 h-4"></i> 实时分发状态
+        </h3>
+        <div class="space-y-3">
+            <div class="bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm font-bold">Eternal Summer (Single)</span>
+                    <span class="text-[10px] text-yellow-500">分发中 85%</span>
                 </div>
-                <div class="bg-[#111] border border-white/10 p-4 rounded-2xl">
-                    <p class="text-[10px] text-gray-500 uppercase">版权覆盖</p>
-                    <p class="text-xl font-bold font-mono">150+ DSP</p>
+                <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+                    <div class="bg-white h-full w-[85%]"></div>
                 </div>
             </div>
-            <h3 class="font-bold mb-4">发行中的作品</h3>
+        </div>
+    </main>
+
+    <main id="view-dist" class="view p-5">
+        <h2 class="text-2xl font-bold mb-6 italic">创建新发行</h2>
+        <div class="space-y-6">
+            <div class="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center bg-zinc-900/30">
+                <i data-lucide="upload-cloud" class="w-10 h-10 mx-auto mb-3 text-gray-500"></i>
+                <p class="text-sm font-bold">上传母带文件</p>
+                <p class="text-[10px] text-gray-600 mt-1">支持 WAV (24bit/96kHz) / FLAC</p>
+            </div>
             <div class="space-y-4">
-                <div class="flex items-center gap-4 bg-[#111] p-3 rounded-xl">
-                    <div class="w-12 h-12 bg-white/10 rounded flex items-center justify-center"><i data-lucide="music" class="w-5 h-5 text-gray-500"></i></div>
-                    <div class="flex-1">
-                        <p class="text-sm font-bold">Midnight City</p>
-                        <p class="text-[10px] text-gray-500">已上线 - Spotify, Apple</p>
-                    </div>
-                    <i data-lucide="more-horizontal" class="text-gray-600"></i>
+                <div>
+                    <label class="text-[10px] text-gray-500 uppercase">歌曲标题</label>
+                    <input type="text" class="w-full bg-zinc-900 border border-white/10 p-3 rounded mt-1 outline-none">
                 </div>
+                <button class="w-full bg-white text-black font-bold py-4 rounded shadow-lg shadow-white/5">推送到全球渠道</button>
             </div>
         </div>
+    </main>
 
-        <div id="upload" class="tab-content p-6 text-center">
-            <h2 class="text-3xl font-bold mb-10 text-left">发布新单曲</h2>
-            <div class="border-2 border-dashed border-white/10 rounded-3xl py-16 mb-8 flex flex-col items-center">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="arrow-up" class="text-black w-8 h-8"></i>
-                </div>
-                <p class="font-bold">点击上传无损音频</p>
-                <p class="text-xs text-gray-500 mt-2">WAV / FLAC / AIFF (24bit)</p>
+    <main id="view-assets" class="view p-5">
+        <h2 class="text-2xl font-bold mb-6 italic">版权资产库</h2>
+        <div class="p-4 border-b border-white/5 flex justify-between items-center">
+            <div>
+                <p class="text-sm font-bold">ISRC: CN-E01-26-001</p>
+                <p class="text-[10px] text-gray-500">已登记于中国版权保护中心</p>
             </div>
-            <input type="text" placeholder="歌曲名称" class="w-full bg-[#111] border border-white/10 p-4 rounded-xl mb-4 outline-none">
-            <button class="w-full bg-white text-black font-bold py-4 rounded-xl">下一步</button>
+            <i data-lucide="shield-check" class="text-green-500 w-5 h-5"></i>
         </div>
+    </main>
 
-        <div id="wallet" class="tab-content p-6">
-            <h2 class="text-3xl font-bold mb-8">财务</h2>
-            <div class="bg-gradient-to-br from-white to-gray-400 p-8 rounded-3xl text-black mb-8">
-                <p class="text-sm font-bold opacity-70">可提现至支付宝</p>
-                <p class="text-4xl font-mono font-black my-4">¥4,500.00</p>
-                <button class="bg-black text-white text-xs px-6 py-2 rounded-full font-bold">立即提现</button>
-            </div>
-            <p class="text-gray-500 text-sm mb-4">历史记录</p>
-            <div class="space-y-4">
-                <div class="flex justify-between border-b border-white/5 pb-2">
-                    <span class="text-sm">1月销售版税</span>
-                    <span class="font-mono text-gr
+    <nav class="fixed bottom-0 w-full bg-black/90 backdrop-blur-xl border-t border-white/10 flex justify-around py-4">
+        <button onclick="switchTab('view-home')" class="tab-btn flex flex-col items-center gap-1 active">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i><span class="text-[10px]">控制台</span>
+        </button>
+        <button onclick="switchTab('view-dist')" class="tab-btn flex flex-col items-center gap-1 text-gray-500">
+            <i data-lucide="send" class="w
