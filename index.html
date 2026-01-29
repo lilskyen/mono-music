@@ -3,94 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MONO Distribution | 全球分发控制台</title>
+    <title>MONO | 全球音乐分发中枢</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --b: #000; --w: #fff; --g: #121212; --border: #262626; }
-        body { background: var(--b); color: var(--w); font-family: sans-serif; overflow-x: hidden; }
+        :root { --black: #000; --white: #fff; --gray: #121212; --border: #262626; --accent: #fff; }
+        body { background: var(--black); color: var(--white); font-family: -apple-system, system-ui, sans-serif; overflow-x: hidden; }
         .view { display: none; }
-        .view.active { display: block; animation: slideUp 0.3s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .tab-btn.active { color: white; border-bottom: 2px solid white; }
+        .view.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .input-dark { background: #111; border: 1px solid #333; padding: 12px; border-radius: 8px; width: 100%; outline: none; }
+        .input-dark:focus { border-color: #fff; }
     </style>
 </head>
-<body class="pb-24">
-    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10 p-4 flex justify-between items-center">
-        <h1 class="text-xl font-black italic tracking-tighter">MONO.后台</h1>
-        <div class="flex gap-4 items-center">
-            <span class="text-[10px] bg-white text-black px-2 py-0.5 font-bold rounded">PRO 账户</span>
-            <i data-lucide="user" class="w-5 h-5"></i>
-        </div>
-    </header>
+<body class="pb-20">
 
-    <main id="view-home" class="view active p-5">
-        <section class="mb-8">
-            <p class="text-gray-500 text-xs uppercase tracking-widest mb-1">未结算全球版税</p>
-            <h2 class="text-4xl font-mono font-bold italic">¥42,850.12</h2>
-            <div class="mt-4 flex gap-2">
-                <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded-sm">立即提现</button>
-                <button class="border border-white/20 text-xs px-4 py-2 rounded-sm">财务报表</button>
-            </div>
-        </section>
-        <div class="grid grid-cols-2 gap-3 mb-8">
-            <div class="bg-zinc-900 p-4 border border-white/5 rounded-lg">
-                <p class="text-gray-500 text-[10px]">分发渠道</p>
-                <p class="text-lg font-bold">156 平台</p>
-            </div>
-            <div class="bg-zinc-900 p-4 border border-white/5 rounded-lg">
-                <p class="text-gray-500 text-[10px]">版权警告</p>
-                <p class="text-lg font-bold text-green-500">0 风险</p>
+    <section id="view-landing" class="view active">
+        <nav class="p-6 flex justify-between items-center sticky top-0 bg-black/80 backdrop-blur-md z-50">
+            <h1 class="text-2xl font-black italic tracking-tighter">MONO.</h1>
+            <button onclick="showView('view-login')" class="text-sm font-bold border border-white/20 px-4 py-2 rounded-full">登录</button>
+        </nav>
+        
+        <div class="p-6 pt-12 text-center">
+            <h2 class="text-5xl font-black leading-none mb-6">让你的声音<br><span class="text-gray-500 italic">在全世界共振</span></h2>
+            <p class="text-gray-400 text-sm mb-10 leading-relaxed px-4">中国领先的独立音乐发行中枢。支持全球 150+ 平台，自动 ISRC 生成，支持多人协作分账，支付宝秒级结算。</p>
+            <div class="flex flex-col gap-4 px-4">
+                <button onclick="showView('view-register')" class="bg-white text-black font-bold py-4 rounded-xl">立即开始发行</button>
+                <button class="border border-white/10 py-4 rounded-xl text-sm">查看分发平台清单</button>
             </div>
         </div>
-        <h3 class="text-sm font-bold mb-4 flex items-center gap-2">
-            <i data-lucide="activity" class="w-4 h-4"></i> 实时分发状态
-        </h3>
-        <div class="space-y-3">
-            <div class="bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
-                <div class="flex justify-between mb-2">
-                    <span class="text-sm font-bold">Eternal Summer (Single)</span>
-                    <span class="text-[10px] text-yellow-500">分发中 85%</span>
-                </div>
-                <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
-                    <div class="bg-white h-full w-[85%]"></div>
-                </div>
-            </div>
-        </div>
-    </main>
 
-    <main id="view-dist" class="view p-5">
-        <h2 class="text-2xl font-bold mb-6 italic">创建新发行</h2>
-        <div class="space-y-6">
-            <div class="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center bg-zinc-900/30">
-                <i data-lucide="upload-cloud" class="w-10 h-10 mx-auto mb-3 text-gray-500"></i>
-                <p class="text-sm font-bold">上传母带文件</p>
-                <p class="text-[10px] text-gray-600 mt-1">支持 WAV (24bit/96kHz) / FLAC</p>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="text-[10px] text-gray-500 uppercase">歌曲标题</label>
-                    <input type="text" class="w-full bg-zinc-900 border border-white/10 p-3 rounded mt-1 outline-none">
-                </div>
-                <button class="w-full bg-white text-black font-bold py-4 rounded shadow-lg shadow-white/5">推送到全球渠道</button>
+        <div class="mt-20 px-6">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 text-center">覆盖全球主流平台</h3>
+            <div class="grid grid-cols-3 gap-8 opacity-40 grayscale">
+                <div class="text-center font-bold italic text-sm">Spotify</div>
+                <div class="text-center font-bold italic text-sm">Apple Music</div>
+                <div class="text-center font-bold italic text-sm">NetEase</div>
+                <div class="text-center font-bold italic text-sm">TikTok</div>
+                <div class="text-center font-bold italic text-sm">Tencent</div>
+                <div class="text-center font-bold italic text-sm">YouTube</div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <main id="view-assets" class="view p-5">
-        <h2 class="text-2xl font-bold mb-6 italic">版权资产库</h2>
-        <div class="p-4 border-b border-white/5 flex justify-between items-center">
-            <div>
-                <p class="text-sm font-bold">ISRC: CN-E01-26-001</p>
-                <p class="text-[10px] text-gray-500">已登记于中国版权保护中心</p>
+    <section id="view-login" class="view p-8 pt-20">
+        <h2 class="text-3xl font-bold mb-2">欢迎回来</h2>
+        <p class="text-gray-500 text-sm mb-10">请输入您的音乐人账号</p>
+        <div class="space-y-4">
+            <input type="email" placeholder="邮箱地址" class="input-dark">
+            <input type="password" placeholder="密码" class="input-dark">
+            <div class="flex justify-between text-xs text-gray-500">
+                <label class="flex items-center gap-2"><input type="checkbox"> 记住我</label>
+                <button onclick="showView('view-forgot')">忘记密码？</button>
             </div>
-            <i data-lucide="shield-check" class="text-green-500 w-5 h-5"></i>
+            <button onclick="enterConsole()" class="w-full bg-white text-black font-bold py-4 rounded-xl mt-6">登录</button>
+            <p class="text-center text-xs text-gray-500 pt-4">没有账号？<button onclick="showView('view-register')" class="text-white font-bold">立即注册</button></p>
         </div>
-    </main>
+    </section>
 
-    <nav class="fixed bottom-0 w-full bg-black/90 backdrop-blur-xl border-t border-white/10 flex justify-around py-4">
-        <button onclick="switchTab('view-home')" class="tab-btn flex flex-col items-center gap-1 active">
-            <i data-lucide="layout-dashboard" class="w-5 h-5"></i><span class="text-[10px]">控制台</span>
-        </button>
-        <button onclick="switchTab('view-dist')" class="tab-btn flex flex-col items-center gap-1 text-gray-500">
-            <i data-lucide="send" class="w
+    <section id="view-register" class="view p-8 pt-20">
+        <h2 class="text-3xl font-bold mb-2">加入 MONO</h2>
+        <p class="text-gray-500 text-sm mb-10">开启您的全球音乐事业</p>
+        <div class="space-y-4">
+            <input type="text" placeholder="音乐人/厂牌名称" class="input-dark">
+            <input type="email" placeholder="电子邮箱" class="input-dark">
+            <input type="password" placeholder="创建密码" class="input-dark">
+            <div class="text-[10px] text-gray-600 leading-tight">点击注册即代表您同意我们的《发行协议》与《隐私条款》。</div>
+            <button onclick="enterConsole()" class="w-full bg-white text-black font-bold py-4 rounded-xl mt-4">创建账号</button>
+            <button onclick="showView('view-login')" class="w-full text-center text-xs text-gray-500 pt-4">返回登录</button>
+        </div>
+    </section>
+
+    <section id="view-forgot" class="view p-8 pt-20">
+        <h2 class="text-3xl font-bold mb-2">重置密码</h2>
+        <p class="text-gray-500 text-sm mb-10">我们将向您的邮箱发送重置链接</p>
+        <div class="space-y-4">
+            <input type="email" placeholder="注册邮箱地址" class="input-dark">
+            <button class="w-full bg-white text-black font-bold py-4 rounded-xl">发送重置邮件</button>
+            <button onclick="showView('view-login')" class="w-full text-center text-xs text-gray-500 pt-4">返回登录</button>
+        </div>
+    </section>
+
+    <section id="view-con
